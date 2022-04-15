@@ -22,7 +22,7 @@ public class Job {
     @Id
     @Indexed(unique = true)
     @NotBlank
-    private long Id;
+    private long id;
 
     @Field
     @Indexed

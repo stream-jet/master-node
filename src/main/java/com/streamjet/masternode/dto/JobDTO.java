@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class JobDTO {
 
-    private long Id;
+    private long id;
 
     private long userId;
 
