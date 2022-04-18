@@ -21,19 +21,16 @@ public class Job {
 
     @Id
     @Indexed(unique = true)
-    @NotBlank
-    private long id;
+    private String id;
 
     @Field
     @Indexed
-    @NotBlank
     private long userId;
 
     @Field
     private JobStatus jobStatus;
 
     @Field
-    @NotBlank
     private JobDetails jobDetails;
 
     @Field

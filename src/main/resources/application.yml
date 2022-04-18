@@ -8,6 +8,7 @@ spring:
       password: x5etxXQTC29HpS7KU3p87m
       host: 10.8.0.1
       authentication-database: admin
+      database: streamjet
 
   kafka:
     bootstrap-servers: 10.8.0.1:9092

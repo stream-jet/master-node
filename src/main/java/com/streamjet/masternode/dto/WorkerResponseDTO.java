@@ -14,7 +14,7 @@ public class WorkerResponseDTO {
 
     private long userId;
 
-    private long jobId;
+    private String jobId;
 
     private JobStatus jobStatus;
 
