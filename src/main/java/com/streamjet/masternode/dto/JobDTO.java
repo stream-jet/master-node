@@ -27,4 +27,6 @@ public class JobDTO {
 
     private LocalDateTime updatedAt;
 
+    private String logs;
+
 }

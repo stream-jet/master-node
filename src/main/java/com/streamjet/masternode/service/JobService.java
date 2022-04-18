@@ -1,6 +1,7 @@
 package com.streamjet.masternode.service;
 
 import com.streamjet.masternode.dto.JobDTO;
+import com.streamjet.masternode.dto.WorkerResponseDTO;
 import com.streamjet.masternode.entity.Job;
 import com.streamjet.masternode.mappers.JobMapper;
 import com.streamjet.masternode.repository.JobRepository;
@@ -33,5 +34,13 @@ public class JobService {
     public JobDTO findJobById(long id){
         Job job = jobRepository.findById(id).orElseThrow(RuntimeException::new);
         return JobMapper.INSTANCE.convertToDTO(job);
+    }
+
+    public void processResponseFromListener(WorkerResponseDTO listenerResponse){
+        JobDTO jobDTO = findJobById(listenerResponse.getJobId());
+        jobDTO.setJobStatus(listenerResponse.getJobStatus());
+        jobDTO.setLogs(listenerResponse.getDetails());
+
+        updateJob(jobDTO);
     }
 }

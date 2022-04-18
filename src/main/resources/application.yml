@@ -2,14 +2,16 @@ server:
   port: 8081
 
 spring:
-  rabbitmq:
-    host: 10.8.0.1
-    port: 5672
-    username: dev1
-    password: sJ8aS7a66DH6MY5A8q39Rz
   data:
     mongodb:
       username: dev
       password: x5etxXQTC29HpS7KU3p87m
       host: 10.8.0.1
       authentication-database: admin
+
+  kafka:
+    bootstrap-servers: 10.8.0.1:9092
+    consumer:
+      group-id: OfficialServer
+    template:
+      default-topic: tasks
