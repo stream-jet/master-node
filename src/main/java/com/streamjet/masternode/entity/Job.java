@@ -42,4 +42,7 @@ public class Job {
     @Field
     private LocalDateTime updatedAt;
 
+    @Field
+    private String logs;
+
 }
