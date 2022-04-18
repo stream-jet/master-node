@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import java.util.Optional;
 
 @EnableMongoRepositories
-public interface JobRepository extends MongoRepository<Job, Long> {
+public interface JobRepository extends MongoRepository<Job, String> {
 
-    Optional<Job> findById(long id);
+    Optional<Job> findById(String id);
 
-    Optional<Job> findByUserId(long id);
+    Optional<Job> findByUserId(String id);
 }

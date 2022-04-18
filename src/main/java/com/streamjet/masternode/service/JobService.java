@@ -1,5 +1,6 @@
 package com.streamjet.masternode.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.streamjet.masternode.dto.JobDTO;
 import com.streamjet.masternode.dto.WorkerResponseDTO;
 import com.streamjet.masternode.entity.Job;
@@ -8,6 +9,7 @@ import com.streamjet.masternode.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class JobService {
@@ -22,6 +24,7 @@ public class JobService {
 
     public void saveJob(JobDTO jobDTO) {
         Job job = JobMapper.INSTANCE.convertToEntity(jobDTO);
+        job.setId(String.valueOf(UUID.randomUUID()));
         job.setCreatedAt(LocalDateTime.now());
         job.setUpdatedAt(LocalDateTime.now());
         jobRepository.save(job);
@@ -33,12 +36,12 @@ public class JobService {
         jobRepository.save(job);
     }
 
-    public JobDTO findJobById(long id){
+    public JobDTO findJobById(String id) {
         Job job = jobRepository.findById(id).orElseThrow(RuntimeException::new);
         return JobMapper.INSTANCE.convertToDTO(job);
     }
 
-    public void processResponseFromListener(WorkerResponseDTO listenerResponse){
+    public void processResponseFromListener(WorkerResponseDTO listenerResponse) {
         JobDTO jobDTO = findJobById(listenerResponse.getJobId());
         jobDTO.setJobStatus(listenerResponse.getJobStatus());
         jobDTO.setLogs(listenerResponse.getDetails());
