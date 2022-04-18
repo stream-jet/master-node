@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 @Service
 public class JobService {
 
+    private final KafkaPublisherService kafkaPublisherService;
     private final JobRepository jobRepository;
 
-    public JobService(JobRepository jobRepository) {
+    public JobService(JobRepository jobRepository, KafkaPublisherService kafkaPublisherService) {
         this.jobRepository = jobRepository;
+        this.kafkaPublisherService = kafkaPublisherService;
     }
 
     public void saveJob(JobDTO jobDTO) {
@@ -42,5 +44,10 @@ public class JobService {
         jobDTO.setLogs(listenerResponse.getDetails());
 
         updateJob(jobDTO);
+    }
+
+    public void publishTask(JobDTO jobDTO) throws JsonProcessingException {
+        kafkaPublisherService.publishNewTask(jobDTO);
+        saveJob(jobDTO);
     }
 }
